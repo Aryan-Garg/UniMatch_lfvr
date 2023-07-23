@@ -21,6 +21,9 @@ from evaluate_stereo import (validate_things, validate_kitti15, validate_eth3d,
                              )
 from unimatch.unimatch import UniMatch
 
+import warnings
+warnings.filterwarnings("ignore")
+
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
 IMAGENET_STD = [0.229, 0.224, 0.225]
 
@@ -203,7 +206,7 @@ def main(args):
     start_step = 0
 
     if args.resume:
-        print("=> Load checkpoint: %s" % args.resume)
+        # print("=> Load checkpoint: %s" % args.resume)
 
         loc = 'cuda:{}'.format(args.local_rank) if torch.cuda.is_available() else 'cpu'
         checkpoint = torch.load(args.resume, map_location=loc)

@@ -19,6 +19,9 @@ from utils.utils import InputPadder
 from utils.file_io import write_pfm
 from utils.visualization import vis_disparity
 
+import warnings
+warnings.filterwarnings("ignore")
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 IMAGENET_MEAN = [0.485, 0.456, 0.406]
@@ -48,7 +51,7 @@ def create_kitti_submission(model,
     test_dataset = KITTI15(mode='testing', transform=val_transform)
 
     num_samples = len(test_dataset)
-    print('Number of test samples: %d' % num_samples)
+    # print('Number of test samples: %d' % num_samples)
 
     if not os.path.exists(output_path):
         os.makedirs(output_path)
@@ -751,14 +754,14 @@ def inference_stereo(model,
     assert len(left_filenames) == len(right_filenames)
 
     num_samples = len(left_filenames)
-    print('%d test samples found' % num_samples)
+    # print('%d test samples found' % num_samples)
 
     fixed_inference_size = inference_size
 
     for i in range(num_samples):
 
-        if (i + 1) % 50 == 0:
-            print('predicting %d/%d' % (i + 1, num_samples))
+        # if (i + 1) % 50 == 0:
+        #     print('predicting %d/%d' % (i + 1, num_samples))
 
         left_name = left_filenames[i]
         right_name = right_filenames[i]
