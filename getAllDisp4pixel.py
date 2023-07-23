@@ -31,7 +31,8 @@ def getAllDisp4pixel():
                     --corr_radius_list -1 4 \
                     --prop_radius_list -1 1 \
                     --reg_refine \
-                    --num_reg_refine 3")
+                    --num_reg_refine 3 \
+                    --save_pfm_disp")
         
 
 if __name__ == '__main__':
