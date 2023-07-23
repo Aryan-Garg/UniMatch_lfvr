@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 import os
-import sys
 import glob
-import contextlib
 from tqdm.auto import tqdm 
 
 
@@ -23,7 +21,7 @@ def getAllDisp4pixel():
                     --inference_dir_left {dirL} \
                     --inference_dir_right {dirR} \
                     --inference_size 512 768 \
-                    --output_path output/Pixel4_BA/{videoName} \
+                    --output_path output/disp_pixel4_BA/{videoName} \
                     --resume pretrained/mixdata.pth \
                     --padding_factor 32 \
                     --upsample_factor 4 \

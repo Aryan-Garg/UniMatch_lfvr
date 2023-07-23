@@ -843,4 +843,4 @@ def inference_stereo(model,
             disp = vis_disparity(disp)
             cv2.imwrite(save_name, disp)
 
-    print('Done!')
+    # print('Done!')
