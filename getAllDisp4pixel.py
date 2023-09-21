@@ -5,23 +5,24 @@ import glob
 from tqdm.auto import tqdm 
 
 
-def getAllDisp4pixel():
-    left = glob.glob('/data2/raghav/datasets/Pixel4_3DP/rectified/B/Video_data/*')
-    right = glob.glob('/data2/raghav/datasets/Pixel4_3DP/rectified/A/Video_data/*')
+def getAllDisp4pixel(dataset = None):
+    assert dataset is not None, "Please provide dataset name"
+    inf_dir = glob.glob(f'/data2/aryan/{dataset}/*')
+    # left = glob.glob('/data2/raghav/datasets/Pixel4_3DP/rectified/B/Video_data/*')
+    # right = glob.glob('/data2/raghav/datasets/Pixel4_3DP/rectified/A/Video_data/*')
     
-    pbar_left = tqdm(left)
-    for dirL in pbar_left:
-        dirR = dirL.replace('B', 'A')
-        videoName = dirL.split('/')[-1]
-        pbar_left.set_description(f"Processing {videoName}")
+    pbar_inf = tqdm(inf_dir)
+    for dir_ in pbar_inf:
+        # dirR = dirL.replace('B', 'A')
+        videoName = dir_.split('/')[-1]
+        pbar_inf.set_description(f"Processing {videoName}")
         # print(videoName)
 
         # Call main_stereo.py with params from gmstereo_demo.sh
-        os.system(f"CUDA_VISIBLE_DEVICES=0 python main_stereo.py \
-                    --inference_dir_left {dirL} \
-                    --inference_dir_right {dirR} \
+        os.system(f"CUDA_VISIBLE_DEVICES=2 python main_stereo.py \
+                    --inference_dir {dir_} \
                     --inference_size 512 768 \
-                    --output_path output/disp_pixel4_BA/{videoName} \
+                    --output_path dp_otherDS/{dataset}/{videoName} \
                     --resume pretrained/mixdata.pth \
                     --padding_factor 32 \
                     --upsample_factor 4 \
@@ -33,7 +34,8 @@ def getAllDisp4pixel():
                     --reg_refine \
                     --num_reg_refine 3 \
                     --save_pfm_disp")
-        
 
 if __name__ == '__main__':
-    getAllDisp4pixel()
+    datasets = ["TAMULF", "Stanford", "Kalantari", "Hybrid"]
+    for dataset in datasets:
+        getAllDisp4pixel(dataset)

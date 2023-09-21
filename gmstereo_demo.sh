@@ -2,11 +2,10 @@
 
 
 # gmstereo-scale2-regrefine3 model
-CUDA_VISIBLE_DEVICES=0 python main_stereo.py \
---inference_dir_left demo/pixel4/deer400/B_deer400 \
---inference_dir_right demo/pixel4/deer400/A_deer400 \
+CUDA_VISIBLE_DEVICES=1 python main_stereo.py \
+--inference_dir /data2/aryan/TAMULF/train_dp \
 --inference_size 512 768 \
---output_path output/pixel4/deer400_wild \
+--output_path ./dp_otherDS/TAMULF/train_dp \
 --resume pretrained/mixdata.pth \
 --padding_factor 32 \
 --upsample_factor 4 \

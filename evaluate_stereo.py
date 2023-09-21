@@ -743,10 +743,12 @@ def inference_stereo(model,
 
     if inference_dir is not None:
         filenames = sorted(glob(inference_dir + '/*.png') + glob(inference_dir + '/*.jpg'))
-
-        left_filenames = filenames[::2]
-        right_filenames = filenames[1::2]
-
+        left_filenames = [file for file in filenames if 'left' in file]
+        left_filenames = sorted(left_filenames)
+        right_filenames = [file for file in filenames if 'right' in file]
+        right_filenames = sorted(right_filenames)
+        # print(left_filenames[:5])
+        # print(right_filenames[:5])
     else:
         left_filenames = sorted(glob(inference_dir_left + '/*.png') + glob(inference_dir_left + '/*.jpg'))
         right_filenames = sorted(glob(inference_dir_right + '/*.png') + glob(inference_dir_right + '/*.jpg'))
